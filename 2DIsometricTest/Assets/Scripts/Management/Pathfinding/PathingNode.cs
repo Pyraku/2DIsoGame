@@ -23,13 +23,17 @@ public class PathingNode
     private TileSpace m_tileSpace = null;
     public TileSpace TSpace { get { return m_tileSpace; } }
 
-    //Sets up new values for a new node
-    public PathingNode(Vector2 nodePosition, WorldPosition worldPosition, int gridX, int gridY, TileSpace tileSpace)
+    public PathingNode(Vector2 nodePosition, int x, int y)
     {
         _NodePosition = nodePosition;
-        _GridX = gridX;
-        _GridY = gridY;
-        m_tileSpace = tileSpace;
+        _GridX = x;
+        _GridY = y;
+    }
+
+    public void AssignTileSpace(TileSpace ts)
+    {
+        m_tileSpace = ts;
+        ts.AddNewPathingNode(this);
     }
 
     //Gets the F cost of the node

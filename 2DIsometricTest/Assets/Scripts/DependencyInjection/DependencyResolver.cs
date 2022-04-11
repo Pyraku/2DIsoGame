@@ -225,7 +225,7 @@ public class DependencyResolver
                 Array typedArray = Array.CreateInstance(elementType, toInject.Length);
                 Array.Copy(toInject, typedArray, toInject.Length);
 
-                injectableMember.SetValue(injectable, typedArray.Length);
+                injectableMember.SetValue(injectable, typedArray);
             }
             catch (Exception ex)
             {

@@ -42,31 +42,42 @@ public class CharacterController : MonoBehaviour
         m_charRef.UpdateWorldPosition(wp);
     }
 
-    public IEnumerator Move(List<Vector2> targets)
+    public void StartMove(List<Vector2> path)
+    {
+        StartCoroutine(Move(path));
+    }
+
+    private IEnumerator Move(List<Vector2> targets)
     {
         foreach (Vector2 v in targets)
         {
             float t = 0.0f;
             WorldPosition wp = new WorldPosition(m_charRef.WorldPosition);
-            Vector2 start = transform.position;
+            Vector2 start = m_charRef.transform.position;
             RotateCharacter(new WorldPosition(v));
             while (t < 1.0f)
             {
                 t += Time.deltaTime * m_moveSpeed;
-                transform.position = Vector2.Lerp(start, v, t);
-                                
-                wp.x = transform.position.x;
-                wp.y = transform.position.y;
+                wp = m_charRef.WorldPosition;
+                //Vector2 pos = Vector2.Lerp(start, v, t);
+
+                wp.x = Mathf.Lerp(start.x, v.x, t);// pos.x;
+                wp.y = Mathf.Lerp(start.y, v.y, t);// pos.y;
+
+                //float p = 8f / 256f;
+
+                //wp.x = Mathf.Floor(wp.x / p) * p;
+                //wp.y = Mathf.Floor(wp.y / p) * p;
 
                 m_charRef.UpdateWorldPosition(wp);
                 yield return null;
             }
+            wp = m_charRef.WorldPosition;
             wp.x = v.x;
             wp.y = v.y;
-
             m_charRef.UpdateWorldPosition(new WorldPosition(wp));
 
-            yield return null;
+            //yield return null;
         }
     }
     //End of primitive functions

@@ -9,6 +9,6 @@ public class Floor : WorldObject
     protected override void SetName()
     {
         name = m_name + "(X:" + m_worldPosition.x + ",Y:" + m_worldPosition.y + ")";
-        m_world.RegisterNewFloor(this);
+        //m_world.RegisterNewFloor(this);
     }
 }

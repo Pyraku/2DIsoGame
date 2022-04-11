@@ -47,6 +47,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -94,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad9d997ec9fa9c4db831a8e3593a955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_world: {fileID: 0}
   m_name: Pistol
   m_worldPosition:
     x: 0
@@ -138,6 +140,7 @@ GameObject:
   - component: {fileID: 4862888790960958}
   - component: {fileID: 212782746115691418}
   - component: {fileID: 114036312540215814}
+  - component: {fileID: 189979081731138754}
   m_Layer: 0
   m_Name: Cap
   m_TagString: Untagged
@@ -175,6 +178,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -222,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8fefd2fd663d604d88846fc19a9425f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_world: {fileID: 0}
   m_name: Cap
   m_worldPosition:
     x: 0
@@ -256,4 +261,16 @@ MonoBehaviour:
   m_radius: 0.5
   m_def: {fileID: 11400000, guid: d8534c3e751e0e441b8e160c793a27af, type: 2}
   m_leftHand: {fileID: 114788140294121748}
-  m_moveSpeed: 5
+--- !u!114 &189979081731138754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656297403665140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 935615f51aa364d488d1cb10177652d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_moveSpeed: 10

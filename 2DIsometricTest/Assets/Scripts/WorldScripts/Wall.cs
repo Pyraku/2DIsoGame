@@ -11,11 +11,11 @@ public class Wall : WorldObject {
     protected bool m_isPassable = false;
     public bool IsPassable { get { return m_isPassable; } }
 
-    protected override void Start()
+    public override void Initialize(World world)
     {
-        
+        base.Initialize(world);
     }
-
+ 
     public override void UpdateWorldPosition(WorldPosition pos)
     {
         base.UpdateWorldPosition(pos);

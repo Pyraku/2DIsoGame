@@ -9,13 +9,12 @@ public class Character : WorldObject
     [SerializeField] protected Weapon m_leftHand = null;
     public Weapon LeftHand { get { return m_leftHand; } }
 
-    private CharacterController m_charController = null;
+    public CharacterController m_charController { get; private set; } = null;
 
-    protected override void Start()
+    public override void Initialize(World world)
     {
-        base.Start();
+        base.Initialize(world);
         m_charController = GetComponent<CharacterController>();
-        if(m_charController == null) { Debug.LogError("Character is missing controller component: " + m_name); return; }
         m_charController.Initialize(this);
     }
 

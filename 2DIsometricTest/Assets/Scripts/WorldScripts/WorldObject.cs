@@ -5,7 +5,6 @@ using SpriteType = ObjectSprite.SpriteType;
 
 public class WorldObject : MonoBehaviour
 {
-    [Inject(InjectFrom.Anywhere)]
     public World m_world;
 
     protected const float m_yOffset = 0.25f;
@@ -33,8 +32,9 @@ public class WorldObject : MonoBehaviour
         BuildSpriteDictionairy();
     }
 
-    protected virtual void Start()
+    public virtual void Initialize(World world)
     {
+        m_world = world;
         UpdateWorldPosition(new WorldPosition(transform.position.x, transform.position.y, m_world.LayerIDs.IndexOf(m_sr.sortingLayerID), (m_worldPosition.angle == SpriteType.South) ? SpriteType.South : m_worldPosition.angle));
         SetName();
     }
@@ -66,12 +66,15 @@ public class WorldObject : MonoBehaviour
     public void SetSprite(SpriteType type)
     {
         if (!m_spriteIndex.ContainsKey(type))
+        {
             if (m_objectSprites.Length > (int)type)
             {
                 m_sr.sprite = m_objectSprites[(int)type]._Sprite;
                 return;
             }
-            else { return; }
+            else
+                return;
+        }
         m_sr.sprite = m_spriteIndex[type]._Sprite;
     }
 

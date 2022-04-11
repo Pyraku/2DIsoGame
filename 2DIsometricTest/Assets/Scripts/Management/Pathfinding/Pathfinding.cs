@@ -8,40 +8,102 @@ public class Pathfinding : MonoBehaviour
     [Inject(InjectFrom.Anywhere)]
     public PathingGrid _Grid;
 
-    [Inject(InjectFrom.Anywhere)]
-    public World m_world;
-
     //Function used to find path through the current level
-    public void FindPath (WorldPosition startPos, WorldPosition targetPos)
-    {
-        if (!m_world.TileSpaces.ContainsKey(startPos) || m_world.TileSpaces[startPos].PNode == null)
-        {
-            Debug.LogError("Cannot find starting node position");
-            return;
-        }
-        if (!m_world.TileSpaces.ContainsKey(targetPos) || m_world.TileSpaces[startPos].PNode == null)
-        {
-            Debug.LogError("Cannot find target node position");
-            return;
-        }
+    //public List<Vector2> FindPath (WorldPosition startPos, WorldPosition targetPos)
+    //{
+    //    if (!m_world.TileSpaces.ContainsKey(startPos) || m_world.TileSpaces[startPos].PNode == null)
+    //    {
+    //        Debug.LogError("Cannot find starting node position");
+    //        return new List<Vector2>();
+    //    }
+    //    if (!m_world.TileSpaces.ContainsKey(targetPos) || m_world.TileSpaces[startPos].PNode == null)
+    //    {
+    //        Debug.LogError("Cannot find target node position");
+    //        return new List<Vector2>();
+    //    }
 
-        PathingNode startNode = m_world.TileSpaces[startPos].PNode;
-        PathingNode targetNode = m_world.TileSpaces[targetPos].PNode;
+    //    PathingNode startNode = m_world.TileSpaces[startPos].PNode;
+    //    PathingNode targetNode = m_world.TileSpaces[targetPos].PNode;
+
+    //    List<PathingNode> openSet = new List<PathingNode>();
+    //    HashSet<PathingNode> closedSet = new HashSet<PathingNode>();
+
+    //    openSet.Add(startNode);
+
+    //    //Main Pathifnding Loop
+    //    while(openSet.Count > 0)
+    //    {
+    //        //Remember to convert to heap
+    //        PathingNode currentNode = openSet[0];
+    //        for(int i = 1; i < openSet.Count; i++)
+    //        {
+    //            if (openSet[i]._FCost < currentNode._FCost || openSet[i]._FCost == currentNode._FCost && openSet[i]._HCost < currentNode._HCost)
+    //            {
+    //                currentNode = openSet[i];
+    //            }
+    //        }
+
+    //        openSet.Remove(currentNode);
+    //        closedSet.Add(currentNode);
+
+    //        if (currentNode == targetNode)
+    //        {
+    //            return RetracePath(startNode, targetNode);
+    //        }
+
+    //        //Checks currentNodes neighbours for suitable node to add to path
+    //        foreach(PathingNode neighbour in _Grid.GetNeighbours(currentNode))
+    //        {
+    //            SpriteType angleTo = GetAngle(currentNode,neighbour);
+    //            SpriteType angleFrom = GetAngle(neighbour,currentNode);
+
+    //            //Debug tools to identify which walls are halting Path
+    //            //if(_Grid.CheckWalls(neighbour, angleTo))
+    //            //    _Grid.angles1.Add(neighbour);
+    //            //if (_Grid.CheckWalls(currentNode, angleFrom))
+    //            //    _Grid.angles2.Add(currentNode);
+
+    //            //Checks to see if anything blocks the path, i.e. non-walkable tiles, already in closed list or has a blocking wall
+    //            if(!neighbour._Walkable || closedSet.Contains(neighbour) || _Grid.CheckWalls(neighbour, angleTo) || _Grid.CheckWalls(currentNode, angleFrom))
+    //                continue;
+
+    //            //Checks the movement cost to neighbour
+    //            int newMovementCostToNeighbour = currentNode._GCost + GetDistance(currentNode, neighbour);
+    //            //If lower than neighbours G cost or not already in openset then neighbour becomes new currentNode
+    //            if(newMovementCostToNeighbour < neighbour._GCost || !openSet.Contains(neighbour))
+    //            {
+    //                neighbour._GCost = newMovementCostToNeighbour;
+    //                neighbour._HCost = GetDistance(neighbour,targetNode);
+    //                neighbour._Parent = currentNode;
+    //                //Add neighbour to openSet if not already
+    //                if (!openSet.Contains(neighbour))
+    //                    openSet.Add(neighbour);
+    //            }
+    //        }
+    //    }
+        
+    //    return new List<Vector2>();
+    //}
+
+    public List<Vector2> FindPath(PathingNode startNode, PathingNode targetNode)
+    {
+        if (startNode == null || targetNode == null) 
+        {
+            Debug.LogError("Target nodes are null");
+            return new List<Vector2>();
+        }
 
         List<PathingNode> openSet = new List<PathingNode>();
         HashSet<PathingNode> closedSet = new HashSet<PathingNode>();
 
-        _Grid.angles1 = new List<PathingNode>();
-        _Grid.angles2 = new List<PathingNode>();
-
         openSet.Add(startNode);
 
         //Main Pathifnding Loop
-        while(openSet.Count > 0)
+        while (openSet.Count > 0)
         {
             //Remember to convert to heap
             PathingNode currentNode = openSet[0];
-            for(int i = 1; i < openSet.Count; i++)
+            for (int i = 1; i < openSet.Count; i++)
             {
                 if (openSet[i]._FCost < currentNode._FCost || openSet[i]._FCost == currentNode._FCost && openSet[i]._HCost < currentNode._HCost)
                 {
@@ -52,35 +114,28 @@ public class Pathfinding : MonoBehaviour
             openSet.Remove(currentNode);
             closedSet.Add(currentNode);
 
-            if(currentNode == targetNode)
+            if (currentNode == targetNode)
             {
-                RetracePath(startNode, targetNode);
-                return;
+                return RetracePath(startNode, targetNode);
             }
 
             //Checks currentNodes neighbours for suitable node to add to path
-            foreach(PathingNode neighbour in _Grid.GetNeighbours(currentNode))
+            foreach (PathingNode neighbour in _Grid.GetNeighbours(currentNode))
             {
-                SpriteType angleTo = GetAngle(currentNode,neighbour);
-                SpriteType angleFrom = GetAngle(neighbour,currentNode);
-
-                //Debug tools to identify which walls are halting Path
-                if(_Grid.CheckWalls(neighbour, angleTo))
-                    _Grid.angles1.Add(neighbour);
-                if (_Grid.CheckWalls(currentNode, angleFrom))
-                    _Grid.angles2.Add(currentNode);
+                SpriteType angleTo = GetAngle(currentNode, neighbour);
+                SpriteType angleFrom = GetAngle(neighbour, currentNode);
 
                 //Checks to see if anything blocks the path, i.e. non-walkable tiles, already in closed list or has a blocking wall
-                if(!neighbour._Walkable || closedSet.Contains(neighbour) || _Grid.CheckWalls(neighbour, angleTo) || _Grid.CheckWalls(currentNode, angleFrom))
+                if (!neighbour._Walkable || closedSet.Contains(neighbour) || _Grid.CheckWalls(neighbour, angleTo) || _Grid.CheckWalls(currentNode, angleFrom))
                     continue;
 
                 //Checks the movement cost to neighbour
                 int newMovementCostToNeighbour = currentNode._GCost + GetDistance(currentNode, neighbour);
                 //If lower than neighbours G cost or not already in openset then neighbour becomes new currentNode
-                if(newMovementCostToNeighbour < neighbour._GCost || !openSet.Contains(neighbour))
+                if (newMovementCostToNeighbour < neighbour._GCost || !openSet.Contains(neighbour))
                 {
                     neighbour._GCost = newMovementCostToNeighbour;
-                    neighbour._HCost = GetDistance(neighbour,targetNode);
+                    neighbour._HCost = GetDistance(neighbour, targetNode);
                     neighbour._Parent = currentNode;
                     //Add neighbour to openSet if not already
                     if (!openSet.Contains(neighbour))
@@ -88,8 +143,10 @@ public class Pathfinding : MonoBehaviour
                 }
             }
         }
+
+        return new List<Vector2>();
     }
-    
+
     //Gets angle of direction from endNode to startNode, (1,0) to (0,0) would equal 7, (4,6) to (5,5) would equal 2
     SpriteType GetAngle(PathingNode startNode, PathingNode endNode)
     {
@@ -106,24 +163,23 @@ public class Pathfinding : MonoBehaviour
     }
 
     //Retraces path using parents of endNode until it reaches the startNode
-    void RetracePath(PathingNode startNode, PathingNode endNode)
+    private List<Vector2> RetracePath(PathingNode startNode, PathingNode endNode)
     {
-        List<PathingNode> path = new List<PathingNode>();
+        //List<PathingNode> path = new List<PathingNode>();
         List<Vector2> worldPath = new List<Vector2>();
         PathingNode currentNode = endNode;
 
         while(currentNode != startNode)
         {
-            path.Add(currentNode);
+            //path.Add(currentNode);
             worldPath.Add(currentNode.TSpace.Position);
             currentNode = currentNode._Parent;
         }
 
-        path.Reverse();
+        //path.Reverse();
         worldPath.Reverse();
 
-        _Grid.path = path;
-        _Grid.worldPath = worldPath;
+        return worldPath;
     }
 
     //Gets the distance from nodeA to nodeB

@@ -22,12 +22,21 @@ public class CombatManager : ManagerBase<CombatState>
     public World m_world;
 
     [Inject(InjectFrom.Anywhere)]
-    public PathingGrid m_pathingGrid;
+    public Pathfinding m_pathfinding;
+
+    //Temp
+    [Inject(InjectFrom.Anywhere)]
+    public Character m_char;
 
     public bool InitializeWorld()
     {
-        if (m_world == null || m_pathingGrid == null) return false;
-        m_pathingGrid.CreateGrid();
+        if (m_world == null) return false;
+        m_pathfinding._Grid.CreateGrid(World.WorldWidth, World.WorldHeight);
+        m_world.BuildWorld(m_pathfinding._Grid.Grid);
+
+        //Set Camera to character
+        m_cameraControl.m_focussedObject = m_char.gameObject;
+        m_cameraControl.SetState(CameraState.CameraState_ObjectFocus);
 
         SetState(CombatState.CombatState_Preparing);
         m_gameStateManager.SetState(GameState.GameState_Gameplay);

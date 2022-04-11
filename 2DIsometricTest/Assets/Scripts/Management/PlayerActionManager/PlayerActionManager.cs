@@ -18,5 +18,9 @@ public enum PlayerActionState
 
 public class PlayerActionManager : ManagerBase<PlayerActionState>
 {
+    [Inject(InjectFrom.Anywhere)]
+    public InputManager m_inputManager = null;
 
+    [Inject(InjectFrom.Anywhere)]
+    public CombatManager m_combatManager = null;
 }
