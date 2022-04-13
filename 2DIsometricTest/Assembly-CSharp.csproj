@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\Management\GameStateManager\GameState_MainMenu.cs" />
     <Compile Include="Assets\Scripts\Management\InputManager.cs" />
     <Compile Include="Assets\Scripts\Management\GameStateManager\GameState_LoadingMenu.cs" />
+    <Compile Include="Assets\Scripts\Debug\CombatTestSetting.cs" />
     <Compile Include="Assets\Scripts\Management\CameraStates\CameraState_ObjectFocus.cs" />
     <Compile Include="Assets\Scripts\Management\GameStateManager\GameState_Gameplay.cs" />
     <Compile Include="Assets\Scripts\Management\GameStateManager\GameState_Paused.cs" />
@@ -88,12 +89,14 @@
     <Compile Include="Assets\Scripts\Management\CombatManager\CombatState_Started.cs" />
     <Compile Include="Assets\Scripts\DependencyInjection\ResolveSubset.cs" />
     <Compile Include="Assets\Scripts\Management\GameStateManager\GameState_Base.cs" />
+    <Compile Include="Assets\Scripts\Debug\UIGrid.cs" />
     <Compile Include="Assets\Scripts\Management\PlayerActionManager\PlayerActionState_Skip.cs" />
     <Compile Include="Assets\Scripts\Management\CombatManager\CombatState_NotStarted.cs" />
+    <Compile Include="Assets\Scripts\Management\WorldAssetManager.cs" />
     <Compile Include="Assets\Scripts\WorldScripts\Door.cs" />
     <Compile Include="Assets\Scripts\WorldScripts\Wall.cs" />
     <Compile Include="Assets\Scripts\Management\CameraStates\CameraControl.cs" />
-    <Compile Include="Assets\Scripts\CharacterController.cs" />
+    <Compile Include="Assets\Scripts\WorldScripts\CharacterController.cs" />
     <Compile Include="Assets\Scripts\Management\Pathfinding\PathingGrid.cs" />
     <Compile Include="Assets\Scripts\WorldScripts\World.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\CharacterDef.cs" />
@@ -103,7 +106,7 @@
     <Compile Include="Assets\Scripts\Management\GameStateManager\GameStateManager.cs" />
     <Compile Include="Assets\Scripts\Management\StateManagerBase\ManagerBase.cs" />
     <Compile Include="Assets\Scripts\WorldScripts\Building.cs" />
-    <Compile Include="Assets\Scripts\WorldAssetManager.cs" />
+    <Compile Include="Assets\Scripts\CustomScripts\CyclableContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -688,8 +691,8 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
+    <Reference Include="Unity.2D.PixelPerfect">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.PixelPerfect.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Editor">
       <HintPath>Library\ScriptAssemblies\com.unity.multiplayer-hlapi.Editor.dll</HintPath>
@@ -714,6 +717,9 @@
     </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>Library\ScriptAssemblies\UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Tilemap.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
@@ -754,6 +760,9 @@
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
       <HintPath>Library\ScriptAssemblies\UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.PixelPerfect.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.PixelPerfect.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
@@ -774,12 +783,6 @@
     </Reference>
     <Reference Include="UnityEngine.Advertisements.Editor">
       <HintPath>Library\ScriptAssemblies\UnityEngine.Advertisements.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.PixelPerfect">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.PixelPerfect.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.PixelPerfect.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.PixelPerfect.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

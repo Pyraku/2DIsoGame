@@ -22,7 +22,7 @@ public class World : MonoBehaviour
     public static readonly float TileHeight = 2.0f, TileWidth = 4.0f;
 
     //Test World Width/Height
-    public static readonly int WorldWidth = 9, WorldHeight = 9;
+    public static int WorldWidth, WorldHeight; // 50 x 50 
 
     private void Awake()
     {
@@ -30,6 +30,14 @@ public class World : MonoBehaviour
         {
             LayerIDs.Add(id.id);
         }
+    }
+
+    public void SetupWorld(CombatTestSetting setting)
+    {
+        if(setting == null) { Debug.LogError("setting is null"); return; }
+        WorldWidth = setting.MapSizeX;
+        WorldHeight = setting.MapSizeY;
+
     }
 
     public void BuildWorld(PathingNode[,] nodes)

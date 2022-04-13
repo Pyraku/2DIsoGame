@@ -49,6 +49,7 @@ public class BasePanel : MonoBehaviour
         m_isShowing = true;
         ChangePanelAlpha(0f, 1f);
         m_canvasGroup.blocksRaycasts = true;
+        OnShow();
     }
 
     public void Hide()
@@ -58,6 +59,17 @@ public class BasePanel : MonoBehaviour
         m_isShowing = false;
         ChangePanelAlpha(1f, 0f);
         m_canvasGroup.blocksRaycasts = false;
+        OnHide();
+    }
+
+    protected virtual void OnShow()
+    {
+
+    }
+
+    protected virtual void OnHide()
+    {
+
     }
 
     private void ChangePanelAlpha(float start, float target)

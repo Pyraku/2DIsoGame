@@ -35,13 +35,30 @@ public class CombatManager : ManagerBase<CombatState>
         m_world.BuildWorld(m_pathfinding._Grid.Grid);
 
         //Set Camera to character
-        m_cameraControl.m_focussedObject = m_char.gameObject;
-        m_cameraControl.SetState(CameraState.CameraState_ObjectFocus);
+        FocusWorldObject(m_char);
 
         SetState(CombatState.CombatState_Preparing);
         m_gameStateManager.SetState(GameState.GameState_Gameplay);
 
         return true;
+    }
+
+    //Uses debug template 
+    public bool InitializeWorld(CombatTestSetting setting)
+    {
+        if (m_world == null) return false;
+        m_pathfinding._Grid.CreateGrid(setting.MapSizeX, setting.MapSizeY);
+        m_world.BuildWorld(m_pathfinding._Grid.Grid);
+        FocusWorldObject(m_char);
+        SetState(CombatState.CombatState_Preparing);
+        m_gameStateManager.SetState(GameState.GameState_Gameplay);
+        return true;
+    }
+
+    public void FocusWorldObject(WorldObject target)
+    {
+        m_cameraControl.m_focussedObject = target.gameObject;
+        m_cameraControl.SetState(CameraState.CameraState_ObjectFocus);
     }
 
 }
