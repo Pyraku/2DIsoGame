@@ -41,6 +41,9 @@ public class CombatTestStartPanel : BasePanel
     public void StartCombatTest()
     {
         if(m_combatManager == null) { Debug.LogError("Combat Manager is null"); return; }
+
+        m_combatManager.m_world.SetupWorld(m_defs.currentElement);
+
         if (!m_combatManager.InitializeWorld()) { Debug.LogError("Combat manager failed to initialize world"); return; }
 
         //If successful hide panel

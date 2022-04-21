@@ -76,8 +76,6 @@ public class CharacterController : MonoBehaviour
             wp.x = v.x;
             wp.y = v.y;
             m_charRef.UpdateWorldPosition(new WorldPosition(wp));
-
-            //yield return null;
         }
     }
     //End of primitive functions

@@ -27,3 +27,11 @@ public struct CharacterData
     public WeaponDef m_wep;
     public Vector2Int m_spawn;
 }
+
+[System.Serializable]
+public struct ObjectData
+{
+    public string m_name;
+    //public ObjectDef m_def;
+    public Vector2Int m_spawn;
+}

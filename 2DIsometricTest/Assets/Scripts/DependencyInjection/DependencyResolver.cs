@@ -2,12 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using UnityEngine;
 
-/// <summary>
-/// Helper class that resolves dependencies in the Unity scene.
-/// </summary>
 public class DependencyResolver
 {
     public void FindObjects(IEnumerable<GameObject> allGameObjects, List<MonoBehaviour> injectables)

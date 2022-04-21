@@ -8,6 +8,7 @@ public class Pathfinding : MonoBehaviour
     [Inject(InjectFrom.Anywhere)]
     public PathingGrid _Grid;
 
+    //This Function is now defunct
     //Function used to find path through the current level
     //public List<Vector2> FindPath (WorldPosition startPos, WorldPosition targetPos)
     //{
@@ -85,6 +86,7 @@ public class Pathfinding : MonoBehaviour
     //    return new List<Vector2>();
     //}
 
+    //
     public List<Vector2> FindPath(PathingNode startNode, PathingNode targetNode)
     {
         if (startNode == null || targetNode == null) 

@@ -78,6 +78,7 @@
     <Compile Include="Assets\Scripts\WorldScripts\Weapon.cs" />
     <Compile Include="Assets\Scripts\Management\CombatManager\CombatManager.cs" />
     <Compile Include="Assets\Scripts\Management\GameStateManager\GameState_MainMenu.cs" />
+    <Compile Include="Assets\Scripts\CustomScripts\CyclableContainer.cs" />
     <Compile Include="Assets\Scripts\Management\InputManager.cs" />
     <Compile Include="Assets\Scripts\Management\GameStateManager\GameState_LoadingMenu.cs" />
     <Compile Include="Assets\Scripts\Debug\CombatTestSetting.cs" />
@@ -106,7 +107,6 @@
     <Compile Include="Assets\Scripts\Management\GameStateManager\GameStateManager.cs" />
     <Compile Include="Assets\Scripts\Management\StateManagerBase\ManagerBase.cs" />
     <Compile Include="Assets\Scripts\WorldScripts\Building.cs" />
-    <Compile Include="Assets\Scripts\CustomScripts\CyclableContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

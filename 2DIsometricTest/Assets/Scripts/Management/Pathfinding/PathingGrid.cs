@@ -11,18 +11,10 @@ public class PathingGrid : MonoBehaviour
     private PathingNode[,] m_grid;
     public PathingNode[,] Grid { get { return m_grid; } }
 
-    float _NodeDiameter;
+    private float NodeDiameter => _NodeRadius * 2f;
     int _GridSizeX, _GridSizeY;
 
     [SerializeField] private bool m_diagonalOn = true;
-
-    void Start()
-    {
-        //Set all the important stuff
-        _NodeDiameter = _NodeRadius * 2;
-        //_GridSizeX = Mathf.RoundToInt(_GridWorldSize.x / _NodeDiameter);
-        //_GridSizeY = Mathf.RoundToInt(_GridWorldSize.y / _NodeDiameter);
-    }
 
     public void CreateGrid(int w, int h)
     {
@@ -33,7 +25,7 @@ public class PathingGrid : MonoBehaviour
         {
             for (int y = 0; y < _GridSizeY; y++)
             {
-                Vector2 _WorldPoint = Vector2.right * (x * _NodeDiameter + _NodeRadius) + Vector2.up * (y * _NodeDiameter + _NodeRadius);
+                Vector2 _WorldPoint = Vector2.right * (x * NodeDiameter + _NodeRadius) + Vector2.up * (y * NodeDiameter + _NodeRadius);
                 PathingNode newNode = new PathingNode(_WorldPoint, x, y);
                 m_grid[x, y] = newNode;
             }

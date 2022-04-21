@@ -37,23 +37,18 @@ public class World : MonoBehaviour
         if(setting == null) { Debug.LogError("setting is null"); return; }
         WorldWidth = setting.MapSizeX;
         WorldHeight = setting.MapSizeY;
-
     }
 
     public void BuildWorld(PathingNode[,] nodes)
     {
-        int requiredFloors = WorldWidth * WorldHeight;
-        if(m_floors.Length < requiredFloors)
-        {
-            Debug.Log("Not enough floors, making more");
-            //Make more
-        }
+        CreateFloorAssets();
 
         for(int x = 0; x < WorldWidth; x++)
             for(int y = 0; y < WorldHeight; y++)
             {
                 float a = (x / TileHeight) - (y / TileHeight);
                 float b = (x / TileWidth) + (y / TileWidth);
+                m_floors[(y * WorldWidth) + x].gameObject.SetActive(true);
                 m_floors[(y * WorldWidth) + x].UpdateWorldPosition(new WorldPosition(a, b, 1, 0));
                 RegisterNewFloor(m_floors[(y * WorldWidth) + x]);
                 if (TileSpaces.ContainsKey(new Vector2(a, b)))
@@ -61,7 +56,24 @@ public class World : MonoBehaviour
             }
 
         foreach (WorldObject w in m_worldObjects)
+        {
             w.Initialize(this);
+        }
+    }
+
+    private void CreateFloorAssets()
+    {
+        List<Floor> floors = new List<Floor>(m_floors);
+        floors.ForEach(x => x.gameObject.SetActive(false));
+
+        int requiredFloors = WorldWidth * WorldHeight;
+        if (m_floors.Length < requiredFloors)
+        {
+            Debug.Log("Not enough floors, making more");
+            floors.AddRange(m_worldAssetManager.CreateAssetList<Floor>(Asset.AssetKey.BaseFloor, requiredFloors - m_floors.Length, transform));
+        }
+
+        m_floors = floors.ToArray();
     }
 
     #region TileSpace Functions

@@ -20,6 +20,8 @@ public class PathingNode
     public int _GCost, _HCost;
     public PathingNode _Parent;
 
+    public int _FCost => _GCost + _HCost;
+
     private TileSpace m_tileSpace = null;
     public TileSpace TSpace { get { return m_tileSpace; } }
 
@@ -34,14 +36,5 @@ public class PathingNode
     {
         m_tileSpace = ts;
         ts.AddNewPathingNode(this);
-    }
-
-    //Gets the F cost of the node
-    public int _FCost
-    {
-        get
-        {
-            return _GCost + _HCost;
-        }
     }
 }
